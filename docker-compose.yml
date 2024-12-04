@@ -51,24 +51,26 @@ services:
     networks:
       - cicd-test
 
-  composer:
-    build:
-      context: dockerfiles
-      dockerfile: composer.Dockerfile
-    volumes:
-      - ./src:/var/www/src
-    networks:
-      - cicd-test
-
-  artisan:
-    build:
-      context: dockerfiles
-      dockerfile: php.Dockerfile
-    volumes:
-      - ./src:/var/www/src
-    entrypoint: ["php", "/var/www/src/artisan"]
-    networks:
-      - cicd-test
+#  composer:
+#    build:
+#      context: dockerfiles
+#      dockerfile: composer.Dockerfile
+#    container_name: composer
+#    volumes:
+#      - ./src:/var/www/src
+#    networks:
+#      - cicd-test
+#
+#  artisan:
+#    build:
+#      context: dockerfiles
+#      dockerfile: php.Dockerfile
+#    container_name: artisan
+#    volumes:
+#      - ./src:/var/www/src
+#    entrypoint: ["php", "/var/www/src/artisan"]
+#    networks:
+#      - cicd-test
 
   phpmyadmin:
     image: "phpmyadmin:fpm-alpine"
