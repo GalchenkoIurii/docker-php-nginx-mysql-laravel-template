@@ -4,43 +4,23 @@ services:
   nginx:
     image: "nginx:stable-alpine"
     container_name: nginx
-    restart: unless-stopped
-    tty: true
     ports:
       - "80:80"
     volumes:
-      - ./src:/var/www/src
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-    networks:
-      - cicd-test
-    depends_on:
-      - php
-      - mysql
+      - ./src:/var/www/html
 
   php:
     build:
       context: dockerfiles
       dockerfile: php.Dockerfile
     container_name: php
-    restart: unless-stopped
-    tty: true
-    environment:
-      SERVICE_NAME: php
-      SERVICE_TAGS: dev
-    working_dir: /var/www/src
     volumes:
-      - ./src:/var/www/src
-      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
-    networks:
-      - cicd-test
-#    ports:
-#      - "9000:9000"
+      - ./src:/var/www/html
 
   mysql:
     image: mysql:8.4.0
     container_name: mysql
-    restart: unless-stopped
-    tty: true
     ports:
       - "3306:3306"
     env_file:
@@ -48,44 +28,21 @@ services:
     volumes:
       - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
-    networks:
-      - cicd-test
 
-#  composer:
-#    build:
-#      context: dockerfiles
-#      dockerfile: composer.Dockerfile
-#    container_name: composer
-#    volumes:
-#      - ./src:/var/www/src
+#  phpmyadmin:
+#    image: "phpmyadmin:fpm-alpine"
+#    container_name: phpmyadmin
+#    restart: always
+#    ports:
+#      - "8080:80"
+#    env_file:
+#      - env/pma.env
 #    networks:
-#      - cicd-test
-#
-#  artisan:
-#    build:
-#      context: dockerfiles
-#      dockerfile: php.Dockerfile
-#    container_name: artisan
-#    volumes:
-#      - ./src:/var/www/src
-#    entrypoint: ["php", "/var/www/src/artisan"]
-#    networks:
-#      - cicd-test
+#      - laravel
 
-  phpmyadmin:
-    image: "phpmyadmin:fpm-alpine"
-    container_name: phpmyadmin
-    restart: always
-    ports:
-      - "8080:80"
-    env_file:
-      - env/pma.env
-    networks:
-      - cicd-test
-
-networks:
-  cicd-test:
-    driver: bridge
+#networks:
+#  laravel:
+#    driver: bridge
 
 volumes:
   dbdata:
