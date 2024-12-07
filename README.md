@@ -10,3 +10,9 @@ PHP, Nginx, MySQL, Laravel starter kit for Docker
 ## Requirements
 * Docker v.
 * Docker Compose v.
+
+## Setting up on DEV environment
+* Clone this repository from GitHub.
+
+## Setting up on PROD environment
+* Clone this repository from GitHub.
