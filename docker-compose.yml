@@ -38,7 +38,7 @@ services:
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
     volumes:
-      - dbdata:/var/lib/mysql
+      - ./src/storage/dbdata:/var/lib/mysql
     networks:
       - laravel
 
