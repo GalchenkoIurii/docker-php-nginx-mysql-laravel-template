@@ -13,6 +13,20 @@ PHP, Nginx, MySQL, Laravel starter kit for Docker
 
 ## Setting up on DEV environment
 * Clone this repository from GitHub.
+* Go to [project-name directory]/src directory and run command:
+```bash
+composer install
+```
+* Run command:
+```bash
+docker exec -it php sh
+```
+to enter the sh-console php's container.
+* Run commands:
+```bash
+php artisan key:generate
+php artisan migrate
+```
 
 ## Setting up on PROD environment
 * Clone this repository from GitHub.
