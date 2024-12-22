@@ -13,7 +13,8 @@ PHP, Nginx, MySQL, Laravel starter kit for Docker
 
 ## Setting up on DEV environment
 * Clone this repository from GitHub.
-* Go to [project-name directory]/src directory and run command:
+* Go to [project-name directory]/src directory. 
+* Rename your .env.example file to fit your creds and run command:
 ```bash
 composer install
 ```
